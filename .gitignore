@@ -1,0 +1,17 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.cache
+
+# Builds
+bin/
+obj/
+*.exe
+*.dll
+
+# Pacotes do NuGet
+packages/
+
+# Configuração local
+appsettings.json

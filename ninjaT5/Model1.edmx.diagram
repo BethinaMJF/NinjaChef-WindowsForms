@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ef0b3e2a61694dad901179c2c15feecf" Name="Diagram1">
+        <EntityTypeShape EntityType="dbFrutaNinjaModel.Espada" Width="1.5" PointX="0.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbFrutaNinjaModel.espadasUsuario" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbFrutaNinjaModel.ExtratoJogador" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbFrutaNinjaModel.Ingrediente" Width="1.5" PointX="5.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbFrutaNinjaModel.OrigemPontos" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbFrutaNinjaModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbFrutaNinjaModel.Usuario" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <AssociationConnector Association="dbFrutaNinjaModel.FK_espadasUsuario_Espada" ManuallyRouted="false" />
+        <AssociationConnector Association="dbFrutaNinjaModel.FK_espadasUsuario_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="dbFrutaNinjaModel.FK_ExtratoJogador_Origem" ManuallyRouted="false" />
+        <AssociationConnector Association="dbFrutaNinjaModel.FK_ExtratoJogador_Usuario" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

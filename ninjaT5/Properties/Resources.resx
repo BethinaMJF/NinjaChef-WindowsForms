@@ -199,6 +199,9 @@
   <data name="explosao" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\explosao.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="explosaoGif" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\explosaoGif.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="hamburguer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\hamburguer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -222,15 +225,6 @@
   </data>
   <data name="kiwic" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\kiwic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="lugar1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\lugar1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="lugar2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\lugar2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="lugar3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\lugar3.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="milk" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\milk.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -291,5 +285,14 @@
   </data>
   <data name="waterc" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\waterc.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1Lugar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1Lugar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_2Lugar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\2Lugar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_3Lugar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\3Lugar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

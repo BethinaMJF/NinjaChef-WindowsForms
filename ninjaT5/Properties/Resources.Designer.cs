@@ -63,6 +63,36 @@ namespace ninjaT5.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _1Lugar {
+            get {
+                object obj = ResourceManager.GetObject("_1Lugar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _2Lugar {
+            get {
+                object obj = ResourceManager.GetObject("_2Lugar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _3Lugar {
+            get {
+                object obj = ResourceManager.GetObject("_3Lugar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap apple {
             get {
                 object obj = ResourceManager.GetObject("apple", resourceCulture);
@@ -333,6 +363,16 @@ namespace ninjaT5.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap explosaoGif {
+            get {
+                object obj = ResourceManager.GetObject("explosaoGif", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap hamburguer {
             get {
                 object obj = ResourceManager.GetObject("hamburguer", resourceCulture);
@@ -406,36 +446,6 @@ namespace ninjaT5.Properties {
         internal static System.Drawing.Bitmap kiwic {
             get {
                 object obj = ResourceManager.GetObject("kiwic", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap lugar1 {
-            get {
-                object obj = ResourceManager.GetObject("lugar1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap lugar2 {
-            get {
-                object obj = ResourceManager.GetObject("lugar2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap lugar3 {
-            get {
-                object obj = ResourceManager.GetObject("lugar3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

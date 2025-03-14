@@ -27,8 +27,13 @@ namespace ninjaT5.PAGES
         public jogo()
         {
             InitializeComponent();
+            
         }
-
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
+            base.OnPaintBackground(e);
+            this.DoubleBuffered = true; // Reduz flickering
+        }
         private void jogo_Load(object sender, EventArgs e)
         {
             var imgEspada = new Bitmap((Image)Properties.Resources.ResourceManager.GetObject($"espada__{dados.atual.idEspadaAtual}_"), 30, 130).GetHicon();
@@ -109,6 +114,7 @@ namespace ninjaT5.PAGES
                 Tag = tipo == 0 ? "bomba" : "fruta "
             };
             p.DragEnter += P_DragEnter;
+            
             if (p.Tag.ToString() == ("bomba"))
             {
                 p.Image = Properties.Resources.bomba;
@@ -186,23 +192,33 @@ namespace ninjaT5.PAGES
             if (cortou)
             {
                 cortou = false;
-
+                
                 if (p.Tag.ToString().Contains("bomba"))
                 {
+                   
                     if (tipoDeJogo == "classico")
                     {
+                        timer1.Stop();
+                        p.BackColor = Color.Transparent;
+                        p.Image = Properties.Resources.explosaoGif;
+                        await Task.Delay(500);
                         ENCERRAR();
-                        
                     }
                     else
                     {
-                        if (tempo60 > 0)
+                        if ((tempo60 - 10) > 0)
                         {
                             tempo60 -= 10;
                             label1.Text = tempo60.ToString();
                             label1.Font = new Font(label1.Font, FontStyle.Bold);
                             await Task.Delay(300);
                             label1.Font = new Font(label1.Font, FontStyle.Regular);
+
+                            timer1.Stop();
+                            p.BackColor = Color.Transparent;
+                            p.Image = Properties.Resources.explosaoGif;
+                            await Task.Delay(500);
+                            timer1.Start();
                         }
                         else
                         {
@@ -210,6 +226,7 @@ namespace ninjaT5.PAGES
                         }
 
                     }
+                    
                 }
                 else
                 {
@@ -227,8 +244,9 @@ namespace ninjaT5.PAGES
             }
         }
 
-        private void ENCERRAR()
+        private  void ENCERRAR()
         {
+
             var nv = new ExtratoJogador()
             {
                 idOrigemPontos = tipoDeJogo == "classico" ? 2 : 3,

@@ -18,7 +18,7 @@ namespace ninjaT5.PAGES
             InitializeComponent();
 
             var lista = ct.Usuario.Select(u =>
-                new nv
+                new dadosPlacar
                 {
                     nome = u.nick,
                     pontos = ct.ExtratoJogador.Where(o => o.idOrigemPontos != 1 && o.idUsuario == u.id).Sum(p => p.pontos) ?? 0
@@ -29,19 +29,19 @@ namespace ninjaT5.PAGES
 
             foreach (var item in lista)
             {
-                dataGridView1.Rows.Add(item.nome, item.pontos);   
+                flowLayoutPanel1.Controls.Add(new usuarioPlacar(item));
             }
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void label4_Click(object sender, EventArgs e)
         {
             new menu().Show();
             Hide();
         }
     }
 
-    internal class nv
+    public class dadosPlacar
     {
         public string nome { get; set; }
         public int pontos { get; set; }

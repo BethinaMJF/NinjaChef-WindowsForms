@@ -63,7 +63,10 @@ namespace ninjaT5.PAGES
                     {
                         btnAcao.BackColor = ColorTranslator.FromHtml("#8c1616");
                     }
-                    btnAcao.BackColor = Color.Transparent;
+                    else
+                    {
+                        btnAcao.BackColor = Color.Transparent;
+                    }
 
                 }
 

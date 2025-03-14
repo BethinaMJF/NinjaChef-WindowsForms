@@ -94,7 +94,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Malgun Gothic", 15F);
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(248, 159);
+            this.label3.Location = new System.Drawing.Point(269, 162);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(110, 41);
             this.label3.TabIndex = 4;
@@ -116,7 +116,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Malgun Gothic", 15F);
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(248, 286);
+            this.label5.Location = new System.Drawing.Point(269, 285);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(110, 41);
             this.label5.TabIndex = 6;

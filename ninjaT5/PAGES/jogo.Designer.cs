@@ -98,11 +98,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1236, 856);
+            this.ClientSize = new System.Drawing.Size(1258, 859);
             this.Controls.Add(this.pictureBox24);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label4);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "jogo";
             this.Text = "jogo";
             this.Load += new System.EventHandler(this.jogo_Load);

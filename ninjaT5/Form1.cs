@@ -16,8 +16,6 @@ namespace ninjaT5
         public Form1()
         {
             InitializeComponent();
-            pictureBox1.Image = (Image)Properties.Resources.ModoClassico;
-            pictureBox2.Image = (Image)Properties.Resources.ModoArcade;
         }
 
         private void button1_Click(object sender, EventArgs e)

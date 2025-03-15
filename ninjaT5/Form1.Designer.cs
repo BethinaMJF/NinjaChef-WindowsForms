@@ -65,9 +65,9 @@
             // 
             this.label5.Font = new System.Drawing.Font("Malgun Gothic", 10F);
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(66, 552);
+            this.label5.Location = new System.Drawing.Point(73, 577);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(441, 138);
+            this.label5.Size = new System.Drawing.Size(441, 98);
             this.label5.TabIndex = 4;
             this.label5.Text = "No modo clássico, o jogador perde se deixar três frutas caírem sem cortar ou se a" +
     "tingir uma bomba.\n\n\n\n\n\n\n\n";
@@ -76,9 +76,9 @@
             // 
             this.label6.Font = new System.Drawing.Font("Malgun Gothic", 10F);
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(655, 552);
+            this.label6.Location = new System.Drawing.Point(662, 577);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(424, 153);
+            this.label6.Size = new System.Drawing.Size(424, 98);
             this.label6.TabIndex = 5;
             this.label6.Text = "No modo arcade, o jogo dura 60 segundos. Cortar bombas reduz ainda mais o tempo.\n" +
     "\n\n";
@@ -90,9 +90,9 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Cooper Black", 18F);
             this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button1.Location = new System.Drawing.Point(71, 683);
+            this.button1.Location = new System.Drawing.Point(71, 708);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(1007, 115);
+            this.button1.Size = new System.Drawing.Size(1007, 90);
             this.button1.TabIndex = 8;
             this.button1.Text = "COMEÇAR";
             this.button1.UseVisualStyleBackColor = false;
@@ -100,7 +100,8 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(660, 214);
+            this.pictureBox2.Image = global::ninjaT5.Properties.Resources.ModoArcade;
+            this.pictureBox2.Location = new System.Drawing.Point(667, 239);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(411, 313);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -109,7 +110,8 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(71, 214);
+            this.pictureBox1.Image = global::ninjaT5.Properties.Resources.ModoClassico;
+            this.pictureBox1.Location = new System.Drawing.Point(78, 239);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(411, 313);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;

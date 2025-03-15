@@ -8,7 +8,7 @@ namespace ninjaT5.PAGES
 {
     public static class dados
     {
-        public static Usuario atual { get; set; } = new Usuario();
-        public static int tipoJogo { get; set; } = 0;
+        public static Usuario usuarioAtual { get; set; } = new Usuario();
+        public static int dificuldadeJogo { get; set; } = 0;
     }
 }

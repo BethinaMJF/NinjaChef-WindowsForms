@@ -12,7 +12,7 @@ namespace ninjaT5.PAGES
 {
     public partial class ranking : baseForm
     {
-        dbFrutaNinjaEntities ct = new dbFrutaNinjaEntities();
+        private dbFrutaNinjaEntities ct = new dbFrutaNinjaEntities();
         public ranking()
         {
             InitializeComponent();

@@ -21,8 +21,8 @@ namespace ninjaT5
             Application.SetCompatibleTextRenderingDefault(false);
 
             
-          /*  var p = new WindowsMediaPlayer() { URL = "Resources\\musica.mp3" };
-            p.controls.play();*/
+          /*  var pbElemento = new WindowsMediaPlayer() { URL = "Resources\\musica.mp3" };
+            pbElemento.controls.play();*/
             
             var settings = new Settings();
             if (settings.PrimeiraVez == false)

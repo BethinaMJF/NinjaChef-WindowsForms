@@ -118,6 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="label2.Text" xml:space="preserve">
-    <value>Aplicativo lúdico e divertido para conscientização sobre o desperdício de alimentos. O jogador assume o papel de um guerreiro que deve cortar ingredientes para preparar receitas, sendo recompensado com moedas de ouro!</value>
+    <value>Ninja Chef é um jogo onde você corta ingredientes passando o mouse sobre eles. Para cortar, pressione o mouse e mova-o sobre o item. Lembre-se, não é possível cortar vários itens com um único clique. Acumule pontos e use-os para comprar espadas especiais no mercado do jogo. Seja rápido e se torne um chef ninja!</value>
   </data>
 </root>

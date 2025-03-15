@@ -12,23 +12,28 @@ namespace ninjaT5.PAGES
 {
     public partial class mercado : baseForm
     {
+        private int totalUser { get; set; }
+        private dbFrutaNinjaEntities ct = new dbFrutaNinjaEntities();
         public mercado()
         {
             InitializeComponent();
         }
 
-        public int totalUser { get; set; }
-        dbFrutaNinjaEntities ct = new dbFrutaNinjaEntities();
+        public void pontosUsuario()
+        {
+            totalUser = ct.ExtratoJogador.Where(u => u.idUsuario == dados.usuarioAtual.id).Sum(u => u.pontos) ?? 0;
+            label18.Text = $"{totalUser} moedas";
+        }
+
         private void mercado_Load(object sender, EventArgs e)
         {
-            int totalMoedas = ct.ExtratoJogador.Where(u => u.idUsuario == dados.atual.id).Sum(u => u.pontos) ?? 0;
-            totalUser = totalMoedas;
-            label18.Text = totalUser.ToString() + " moedas";
             DadosMercado();
         }
 
         public void DadosMercado()
         {
+            pontosUsuario();
+
             for (int i = 0; i < 8; i++)
             {
                 var nome = (Label)Controls["label" + (i + 1)];
@@ -37,146 +42,134 @@ namespace ninjaT5.PAGES
                 var bloqueado = (PictureBox)Controls["pictureBox" + (i + 9)];
                 var btnAcao = (Button)Controls["button" + (i + 1)];
 
-
                 nome.Text = ct.Espada.FirstOrDefault(u => u.id == (i + 1)).espada1;
                 foto.Image = (Image)Properties.Resources.ResourceManager.GetObject($"espada__{(i + 1)}_");
                 preco.Text = ct.Espada.FirstOrDefault(u => u.id == (i + 1)).preco.ToString();
 
-                if (ct.Usuario.FirstOrDefault(u => u.id == dados.atual.id && u.idEspadaAtual == (i + 1)) != null)
+                if (dados.usuarioAtual.idEspadaAtual == (1 + i) )
                 {
                     btnAcao.Text = "Selecionada";
                     btnAcao.BackColor = ColorTranslator.FromHtml("#f56c00");
                     panel1.Location = foto.Location;
                     bloqueado.Visible = false;
                 }
-                else if (ct.espadasUsuario.FirstOrDefault(u => u.idUsuario == dados.atual.id && u.idEspada == (i + 1)) != null)
+                else if (ct.espadasUsuario.FirstOrDefault(u => u.idUsuario == dados.usuarioAtual.id && u.idEspada == (i + 1)) != null)
                 {
                     bloqueado.Visible = false;
                     btnAcao.Text = "Usar";
                     btnAcao.BackColor = Color.Transparent;
-
                 }
                 else
                 {
                     btnAcao.Text = "Comprar";
-                    if (totalUser < int.Parse(preco.Text))
-                    {
-                        btnAcao.BackColor = ColorTranslator.FromHtml("#8c1616");
-                    }
-                    else
-                    {
-                        btnAcao.BackColor = Color.Transparent;
-                    }
-
+                    btnAcao.BackColor = totalUser < int.Parse(preco.Text) ? btnAcao.BackColor = ColorTranslator.FromHtml("#8c1616") : Color.Transparent;
                 }
 
             }
         }
 
-        private void verificar(int id)
+        private void verificarAcao(int id)
         {
             var btnAcao = (Button)Controls["button" + id];
             if (btnAcao.Text == "Comprar")
             {
-                comprar(id);
+                comprarEspada(id);
             }
             else
             {
-                usar(id);
+                usarEspada(id);
             }
             DadosMercado();
 
         }
-        private void comprar(int id)
+        private void comprarEspada(int id)
         {
             if (totalUser >= ct.Espada.FirstOrDefault(u => u.id == id).preco)
             {
                 var espadasUsuario = new espadasUsuario()
                 {
                     idEspada = id,
-                    idUsuario = dados.atual.id,
+                    idUsuario = dados.usuarioAtual.id,
 
                 };
-
                 ct.espadasUsuario.Add(espadasUsuario);
 
                 var ExtratoJogador = new ExtratoJogador()
                 {
                     idOrigemPontos = 1,
                     pontos = -(((int)ct.Espada.FirstOrDefault(u => u.id == (id)).preco.Value)),
-                    idUsuario = dados.atual.id
+                    idUsuario = dados.usuarioAtual.id
                 };
-
                 ct.ExtratoJogador.Add(ExtratoJogador);
+
                 ct.SaveChanges();
-                dados.atual = ct.Usuario.FirstOrDefault(u => u.id == dados.atual.id);
-                totalUser = ct.ExtratoJogador.Where(u => u.idUsuario == dados.atual.id).Sum(u => u.pontos) ?? 0;
-                label18.Text = totalUser + " Pontos";
+                dados.usuarioAtual = ct.Usuario.FirstOrDefault(u => u.id == dados.usuarioAtual.id);
+                pontosUsuario();
             }
 
         }
 
-        private void usar(int id)
+        private void usarEspada(int id)
         {
-            var btnEspadaAtual = Controls["button" + dados.atual.idEspadaAtual];
-            btnEspadaAtual.Text = "Usar";
+            var espadaAtual = Controls["button" + dados.usuarioAtual.idEspadaAtual];
+            espadaAtual.Text = "Usar";
 
-            var spadaSelecionada = Controls["button" + id];
-            spadaSelecionada.Text = "Selecionada";
+            var espadaSelecionada = Controls["button" + id];
+            espadaSelecionada.Text = "Selecionada";
 
-            var user = ct.Usuario.FirstOrDefault(u => u.id == dados.atual.id);
+            var user = ct.Usuario.FirstOrDefault(u => u.id == dados.usuarioAtual.id);
             user.idEspadaAtual = id;
             ct.SaveChanges();
-            dados.atual = user;
+            dados.usuarioAtual = user;
             panel1.Location = Controls["label" + id].Location;
 
         }
 
-        #region Metodos de verificar acao + idEspada
+        #region Metodos de Verificar Acao + idEspada selecionada
         private void button1_Click(object sender, EventArgs e)
         {
-            verificar(1);
+            verificarAcao(1);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            verificar(2);
+            verificarAcao(2);
 
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            verificar(3);
+            verificarAcao(3);
 
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            verificar(4);
+            verificarAcao(4);
 
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            verificar(5);
+            verificarAcao(5);
 
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            verificar(6);
+            verificarAcao(6);
 
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            verificar(7);
+            verificarAcao(7);
 
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            verificar(8);
+            verificarAcao(8);
 
         }
         #endregion

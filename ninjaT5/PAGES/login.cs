@@ -16,17 +16,17 @@ namespace ninjaT5.PAGES
 {
     public partial class login : baseForm
     {
-        dbFrutaNinjaEntities ct = new dbFrutaNinjaEntities();
-        public PictureBox itemTela { get; set; }
-        int y0, g = 1, direcao, xFinal, tempo, pontosGanhos;
-        double v0x, v0y;
-        Random random = new Random();
+        private dbFrutaNinjaEntities ct = new dbFrutaNinjaEntities();
+        private PictureBox itemTela { get; set; }
+        private int yInicial, g = 1, direcaoQueda, xFinal, tempo, pontosGanhos;
+        private double velocidadeX, velocidadeY;
+        private Random random = new Random();
         public login()
         {
             InitializeComponent();
             button1.Focus();
             timer1.Interval = 30;
-            Height += 1;
+            Height += 1; // ajustar panel no centro
         }
         private void login_Load(object sender, EventArgs e)
         {
@@ -36,6 +36,7 @@ namespace ninjaT5.PAGES
             textBox2.Text = "inisira sua senha";
 
         }
+        #region Animacao 
         private void CRIAR() // Apenas alimentos 
         {
             itemTela = new PictureBox()
@@ -56,32 +57,27 @@ namespace ninjaT5.PAGES
         private void CARREGAR()
         {
             tempo = 0;
-            y0 = this.Height;
+            yInicial = this.Height;
+
             int valueFinal = this.Height - 60;
             xFinal = random.Next(60, (valueFinal > 60 ? valueFinal : 61));
+
             var aceleracaoY = Height / 150;
             var aceleracaoX = Width / 150;
-            v0x = random.Next(aceleracaoY + 20, aceleracaoY + 30);
-            v0y = random.Next(aceleracaoX + 20, aceleracaoX + 30);
-            direcao = random.Next(0, 2);
+            velocidadeX = random.Next(aceleracaoY + 20, aceleracaoY + 30);
+            velocidadeY = random.Next(aceleracaoX + 20, aceleracaoX + 30);
+
+            direcaoQueda = random.Next(0, 2);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            int x;
-            if (direcao == 0)
-            {
-                x = (int)(v0x + tempo + xFinal);
-            }
-            else
-            {
-                x = (int)(v0x - tempo + xFinal);
+            int x = direcaoQueda == 0 ? (int)(velocidadeX + tempo + xFinal) : (int)(velocidadeX - tempo + xFinal);
+            var y = (int)(yInicial - velocidadeY * tempo + (g * Math.Pow(tempo, 2)) / 2);
 
-            }
-
-            var y = (int)(y0 - v0y * tempo + (g * Math.Pow(tempo, 2)) / 2);
-            itemTela.Location = new Point(x + 30, y);
+            itemTela.Location = new Point(x, y);
             tempo++;
+
             if (y > this.Height)
             {
                 itemTela.Dispose();
@@ -89,8 +85,9 @@ namespace ninjaT5.PAGES
             }
         }
 
-        //Limpar Placeholder
-        #region
+        #endregion
+
+        #region Placeholder
         private void textBox1_Enter(object sender, EventArgs e)
         {
             textBox1.Text = "";
@@ -129,8 +126,8 @@ namespace ninjaT5.PAGES
         {
            // if(verificarLogin() == "ok")
             {
-                //dados.atual = ct.Usuario.FirstOrDefault(u => u.nick == textBox1.Text || u.email == textBox1.Text);
-                dados.atual = ct.Usuario.FirstOrDefault(u=> u.id== 2);
+                //dados.usuarioAtual = ct.Usuario.FirstOrDefault(u => u.nick == textBox1.Text || u.email == textBox1.Text);
+                dados.usuarioAtual = ct.Usuario.FirstOrDefault(u=> u.id== 2);
                 new menu().Show();
                 Hide();
             }
@@ -144,10 +141,7 @@ namespace ninjaT5.PAGES
         private string verificarLogin()
         {
 
-            if (string.IsNullOrWhiteSpace(textBox1.Text) ||
-            string.IsNullOrWhiteSpace(textBox2.Text) ||
-             textBox1.Text == "insira seu nick ou email" ||
-            textBox2.Text == "inisira sua senha" )
+            if (string.IsNullOrWhiteSpace(textBox1.Text) || string.IsNullOrWhiteSpace(textBox2.Text) || textBox1.Text == "insira seu nick ou email" ||  textBox2.Text == "inisira sua senha" )
                 return "Preencha todos os campos";
 
             if (!Regex.IsMatch(textBox1.Text, "^[a-zA-Z0-9]+$") && !Regex.IsMatch(textBox1.Text, "^[a-zA-Z]+@[a-zA-Z]+\\.[a-zA-Z]+$"))
@@ -164,7 +158,7 @@ namespace ninjaT5.PAGES
                 var salt = Convert.FromBase64String(user.salt);
                 var rfc = new Rfc2898DeriveBytes(textBox2.Text, salt);
                 var senha = Convert.ToBase64String(rfc.GetBytes(32));
-                if (user != null && user.senha != senha)
+                if (user.senha != senha)
                     return "Senha incorreta";
             }
             else

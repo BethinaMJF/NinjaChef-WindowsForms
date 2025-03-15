@@ -13,30 +13,17 @@ namespace ninjaT5.PAGES
 {
     public partial class menu : baseForm
     {
-        dbFrutaNinjaEntities ct = new dbFrutaNinjaEntities();
-        public MemoryStream ms { get; set; } = new MemoryStream();
+        private dbFrutaNinjaEntities ct = new dbFrutaNinjaEntities();
+        private MemoryStream ms { get; set; } = new MemoryStream();
 
         public menu()
         {
             InitializeComponent();
             carregarFoto();
-            label2.Text = dados.atual.nick;
-            comboBox1.SelectedIndex = dados.tipoJogo;
+            label2.Text = dados.usuarioAtual.nick;
+            comboBox1.SelectedIndex = dados.dificuldadeJogo;
         }
 
-        private void carregarFoto()
-        {
-            if (dados.atual.foto != null)
-            {
-                pictureBox1.Image = Image.FromStream(new MemoryStream(dados.atual.foto));
-            }
-            else
-            {
-                pictureBox1.Image = Properties.Resources.semFoto;
-
-            }
-
-        }
         #region Navegação
         private void button2_Click(object sender, EventArgs e)
         {
@@ -47,6 +34,19 @@ namespace ninjaT5.PAGES
         private void button1_Click(object sender, EventArgs e)
         {
             new PAGES.mercado().Show();
+            Hide();
+        }
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            dados.dificuldadeJogo = comboBox1.SelectedIndex;
+            new jogo() { tipoDeJogo = "classico" }.Show();
+            Hide();
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            dados.dificuldadeJogo = comboBox1.SelectedIndex;
+            new jogo() { tipoDeJogo = "arcade" }.Show();
             Hide();
         }
 
@@ -61,7 +61,7 @@ namespace ninjaT5.PAGES
 
         private void button3_Click_1(object sender, EventArgs e)
         {
-            var user = ct.Usuario.FirstOrDefault(u => u.id == dados.atual.id);
+            var user = ct.Usuario.FirstOrDefault(u => u.id == dados.usuarioAtual.id);
 
             // Alterar foto
             if (pictureBox4.Image != null)
@@ -76,7 +76,7 @@ namespace ninjaT5.PAGES
             ct.SaveChanges();
             panel1.Visible = false;
             pictureBox4.Image = null;
-            dados.atual = user; 
+            dados.usuarioAtual = user; 
             carregarFoto();
         }
 
@@ -98,16 +98,10 @@ namespace ninjaT5.PAGES
 
         #endregion
 
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-            new jogo() { tipoDeJogo = "classico", dificuldade = comboBox1.SelectedItem.ToString() }.Show();
-            Hide();
-        }
 
-        private void pictureBox3_Click(object sender, EventArgs e)
+        private void carregarFoto()
         {
-            new jogo() { tipoDeJogo = "arcade", dificuldade = comboBox1.SelectedItem.ToString() }.Show();
-            Hide();
+            pictureBox1.Image = dados.usuarioAtual.foto == null ? Properties.Resources.semFoto : Image.FromStream(new MemoryStream(dados.usuarioAtual.foto)) ;
         }
     }
 }

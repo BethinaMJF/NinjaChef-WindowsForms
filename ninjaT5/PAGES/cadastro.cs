@@ -73,14 +73,7 @@ namespace ninjaT5.PAGES
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var salt = new byte[8];
-            new RNGCryptoServiceProvider().GetBytes(salt);
-            var rfc = new Rfc2898DeriveBytes(textBox3.Text, salt);
-            string senha = Convert.ToBase64String(rfc.GetBytes(32));
-            string saltString = Convert.ToBase64String(salt);
-
-            Clipboard.SetText($"hash: {senha} -- Salt: {saltString}");
-          /*  if (verificar() == "ok")
+            if (verificar() == "ok")
             {
                 var salt = new byte[8];
                 new RNGCryptoServiceProvider().GetBytes(salt);
@@ -107,15 +100,14 @@ namespace ninjaT5.PAGES
                 ct.espadasUsuario.Add(espadaUsuario);
 
                 ct.SaveChanges();
-                dados.atual = ct.Usuario.FirstOrDefault(u => u.email == textBox2.Text);
-
+                dados.usuarioAtual = ct.Usuario.FirstOrDefault(u => u.email == textBox2.Text);
                 new PAGES.menu().Show();
                 Hide();
             }
             else
             {
                 MessageBox.Show(verificar(), "Fruits Ninja", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }*/
+            }
         }
         private string verificar()
         {
@@ -131,7 +123,7 @@ namespace ninjaT5.PAGES
 
 
             if (!Regex.IsMatch(textBox2.Text, "^[a-zA-Z]+@[a-zA-Z]+\\.[a-zA-Z]+$"))
-                return "O email precisa conter o padrao letras@letras.letras, de 5 a 10 caracteres";
+                return "O email precisa conter o padrao letras@letras.letras";
 
             if (ct.Usuario.FirstOrDefault(u => u.nick == textBox1.Text) != null)
                 return "O nick ja esta sendo usado, digite um novo";

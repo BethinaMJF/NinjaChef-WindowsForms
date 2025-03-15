@@ -47,7 +47,7 @@ namespace ninjaT5.Properties {
         }
         
         /// <summary>
-        ///   Substitui a propriedade CurrentUICulture do thread atual para todas as
+        ///   Substitui a propriedade CurrentUICulture do thread usuarioAtual para todas as
         ///   pesquisas de recursos que usam essa classe de recurso de tipo de alta segurança.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]

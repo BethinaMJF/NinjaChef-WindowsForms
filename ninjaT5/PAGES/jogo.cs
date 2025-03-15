@@ -15,31 +15,25 @@ namespace ninjaT5.PAGES
     public partial class jogo : baseForm
     {
         public string tipoDeJogo { get; set; }
-        public string dificuldade { get; set; }
-        public string novamente { get; set; }
-        public dbFrutaNinjaEntities ct = new dbFrutaNinjaEntities();
-        public PictureBox p { get; set; }
-        public int y0, g = 1, direcao, xFinal, tempo, pontosGanhos, vidas = 3, tempo60 = 60;
-        public double v0x, v0y;
-        public Random rand = new Random();
-        public bool cortou = false;
+
+        private dbFrutaNinjaEntities ct = new dbFrutaNinjaEntities();
+        private PictureBox pbElemento { get; set; }
+        private int y0, g = 1, direcaoQueda, xFinal, tempo, pontosGanhos, vidas = 3, tempoJogada = 60;
+        private double velocidadeX, velocidadeY;
+        private Random random = new Random();
+        private bool cortou = false;
 
         public jogo()
         {
             InitializeComponent();
-            
         }
-        protected override void OnPaintBackground(PaintEventArgs e)
-        {
-            base.OnPaintBackground(e);
-            this.DoubleBuffered = true; // Reduz flickering
-        }
+
         private void jogo_Load(object sender, EventArgs e)
         {
-            var imgEspada = new Bitmap((Image)Properties.Resources.ResourceManager.GetObject($"espada__{dados.atual.idEspadaAtual}_"), 30, 130).GetHicon();
+            var imgEspada = new Bitmap((Image)Properties.Resources.ResourceManager.GetObject($"espada__{dados.usuarioAtual.idEspadaAtual}_"), 30, 130).GetHicon();
             Cursor = new Cursor(imgEspada);
 
-            timer1.Interval = dificuldade == "Fácil" ? 30 : dificuldade == "Médio" ? 22 : 16;
+            timer1.Interval = dados.dificuldadeJogo == 0 ? 30 : dados.dificuldadeJogo == 1 ? 20 : 5;
 
             if (tipoDeJogo == "classico")
             {
@@ -51,17 +45,26 @@ namespace ninjaT5.PAGES
                 timer2.Start();
             }
 
-            CRIAR();
+            criarElemento();
             timer1.Start();
         }
 
-        private void jogo_MouseDown(object sender, MouseEventArgs e)
+        // Timer de 60 segundos
+        private void timer2_Tick(object sender, EventArgs e) 
         {
-            DoDragDrop(this, DragDropEffects.Copy);
-            cortou = true;
+            if (tempoJogada > 0)
+            {
+                tempoJogada--;
+                label1.Text = tempoJogada.ToString();
+            }
+            else
+            {
+                encerrarJogo();
+            }
         }
 
-        private void label4_Click(object sender, EventArgs e)
+        // Metodo Pausar
+        private void label4_Click(object sender, EventArgs e) 
         {
             timer1.Stop();
             timer2.Stop();
@@ -82,85 +85,56 @@ namespace ninjaT5.PAGES
             }
         }
 
-        private void jogo_MouseUp(object sender, MouseEventArgs e)
-        {
-            cortou = false;
-        }
 
-
-        private void timer2_Tick(object sender, EventArgs e)
+        #region Animacao
+        private void criarElemento()
         {
-            if (tempo60 > 0 )
-            {
-                tempo60--;
-                label1.Text = tempo60.ToString();
-            }
-            else
-            {
-                ENCERRAR();
-            }
-        }
-
-        private void CRIAR()
-        {
-            var tipo = rand.Next(0,4); 
-            p= new PictureBox()
+            var tipoElemento = random.Next(0,4); // Probabilidade de ser bomba 1/4 (zero == bomba)
+            pbElemento= new PictureBox()
             {
                 Height= 60, 
                 Width= 60,
                 AllowDrop = true,
                 Location = new Point(0, this.Height ),
                 SizeMode = PictureBoxSizeMode.StretchImage,
-                Tag = tipo == 0 ? "bomba" : "fruta "
             };
-            p.DragEnter += P_DragEnter;
+            pbElemento.DragEnter += P_DragEnter;
             
-            if (p.Tag.ToString() == ("bomba"))
+            if (tipoElemento == 0)
             {
-                p.Image = Properties.Resources.bomba;
+                pbElemento.Image = Properties.Resources.bomba;
+                pbElemento.Tag = "bomba";
             }
             else
             {
-                var ind = rand.Next(1, ct.Ingrediente.Count());
-                p.Image = (Image)Properties.Resources.ResourceManager.GetObject($"{ct.Ingrediente.FirstOrDefault(u=> u.id == ind).Ingredientes}");
-                p.Tag += ind.ToString();
+                var idIngrediente = random.Next(1, ct.Ingrediente.Count());
+                pbElemento.Image = (Image)Properties.Resources.ResourceManager.GetObject($"{ct.Ingrediente.FirstOrDefault(u=> u.id == idIngrediente).Ingredientes}");
+                pbElemento.Tag = idIngrediente.ToString();
             }
-            Controls.Add(p);
-            CARREGAR();
+            Controls.Add(pbElemento);
+            carregarDados();
 
         }
-
-
-        private void CARREGAR()
+        private void carregarDados()
         {
             tempo = 0;
             y0 = this.Height;
-            xFinal = rand.Next(60, this.Height - 60);
-            v0x = rand.Next(20,40);
-            v0y = rand.Next(20, 32);
-            direcao = rand.Next(0,2);
-
+            xFinal = random.Next(60, this.Height - 60);
+            velocidadeX = random.Next(20,40);
+            velocidadeY = random.Next(20, 32);
+            direcaoQueda = random.Next(0,2);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            int x;
-            if (direcao == 0)
-            {
-                x = (int)(v0x + tempo + xFinal);
-            }
-            else
-            {
-                x = (int)(v0x - tempo + xFinal);
+            int x = direcaoQueda == 0 ? (int)(velocidadeX + tempo + xFinal) : (int)(velocidadeX - tempo + xFinal);
+            var y = (int)(y0 - velocidadeY * tempo + (g * Math.Pow(tempo, 2)) / 2);
+            pbElemento.Location = new Point(x, y);
 
-            }
-
-            var y = (int)(y0 - v0y * tempo + (g * Math.Pow(tempo, 2)) / 2);
-            p.Location = new Point(x, y);
             tempo++;
             if (y > this.Height)
             {
-                if (tipoDeJogo == "classico" && !p.Tag.ToString().Contains("bomba"))
+                if (tipoDeJogo == "classico" && !pbElemento.Tag.ToString().Contains("bomba"))
                 {
                     vidas--;
                     switch (label1.Text)
@@ -172,94 +146,90 @@ namespace ninjaT5.PAGES
                             label1.Text = "❤️";
                             break;
                         case "❤️":
-                            ENCERRAR();
+                            encerrarJogo();
                             break;
                         default:
                             break;
                     }
                 }
-                p.Dispose();
-                CRIAR();
+                pbElemento.Dispose();
+                criarElemento();
             }
+        }
 
-
+        // Acao de Corte
+        private void jogo_MouseUp(object sender, MouseEventArgs e)
+        {
+            cortou = false;
+        }
+        private void jogo_MouseDown(object sender, MouseEventArgs e)
+        {
+            DoDragDrop(this, DragDropEffects.Copy);
+            cortou = true;
         }
         private async void P_DragEnter(object sender, DragEventArgs e)
         {
-
-            var h = new Bitmap((Image)Properties.Resources.ResourceManager.GetObject($"espada__{dados.atual.idEspadaAtual}_"), 30,130).GetHicon();
-            Cursor = new Cursor(h);
             if (cortou)
             {
                 cortou = false;
-                
-                if (p.Tag.ToString().Contains("bomba"))
+                if (pbElemento.Tag.ToString().Contains("bomba"))
                 {
-                   
                     if (tipoDeJogo == "classico")
                     {
                         timer1.Stop();
-                        p.BackColor = Color.Transparent;
-                        p.Image = Properties.Resources.explosaoGif;
+                        pbElemento.Image = Properties.Resources.explosaoGif;
                         await Task.Delay(500);
-                        ENCERRAR();
+                        encerrarJogo();
                     }
                     else
                     {
-                        if ((tempo60 - 10) > 0)
+                        if ((tempoJogada - 10) > 0)
                         {
-                            tempo60 -= 10;
-                            label1.Text = tempo60.ToString();
-                            label1.Font = new Font(label1.Font, FontStyle.Bold);
-                            await Task.Delay(300);
-                            label1.Font = new Font(label1.Font, FontStyle.Regular);
-
-                            timer1.Stop();
-                            p.BackColor = Color.Transparent;
-                            p.Image = Properties.Resources.explosaoGif;
-                            await Task.Delay(500);
-                            timer1.Start();
+                            tempoJogada -= 10;
+                            label1.Text = tempoJogada.ToString();
+                            label1.ForeColor = Color.Red;
+                            pbElemento.BackColor = Color.Transparent;
+                            pbElemento.Image = Properties.Resources.explosaoGif;
+                            await Task.Delay(700);
+                            label1.ForeColor = Color.FromArgb(247, 186, 1);
                         }
                         else
                         {
-                            ENCERRAR();
+                            encerrarJogo();
                         }
 
                     }
-                    
                 }
                 else
                 {
-                    var id = int.Parse(p.Tag.ToString().Split(' ')[1]);
-                    var pontos = ct.Ingrediente.FirstOrDefault(u=> u.id == id);
-                    pontosGanhos += pontos.ponto.Value;
-                    label2.Text = pontosGanhos.ToString() + " pontos";
-
-                    p.Image = (Image)Properties.Resources.ResourceManager.GetObject($"{pontos.Ingredientes}c");
+                    var idIngrediente = int.Parse(pbElemento.Tag.ToString());
+                    var ingrediente = ct.Ingrediente.FirstOrDefault(u=> u.id == idIngrediente);
+                    pontosGanhos += ingrediente.ponto.Value;
+                    label2.Text = $"{pontosGanhos} pontos";
+                    pbElemento.Image = (Image)Properties.Resources.ResourceManager.GetObject($"{ingrediente.Ingredientes}c");
                     await Task.Delay(100);
-
                 }
-                p.Dispose();
-                CRIAR();
+                pbElemento.Dispose();
+                criarElemento();
             }
         }
+        #endregion
 
-        private  void ENCERRAR()
+        private void encerrarJogo()
         {
-
-            var nv = new ExtratoJogador()
+            var extratoJogo = new ExtratoJogador()
             {
                 idOrigemPontos = tipoDeJogo == "classico" ? 2 : 3,
-                idUsuario = dados.atual.id,
+                idUsuario = dados.usuarioAtual.id,
                 pontos = pontosGanhos,
 
             };
-            ct.ExtratoJogador.Add(nv);
+            ct.ExtratoJogador.Add(extratoJogo);
             ct.SaveChanges();
 
             timer1.Stop();
             timer2.Stop();
-            new score(pontosGanhos) { tipoDeJogoScore = tipoDeJogo, dificuldadeScore = dificuldade}.Show();
+            new score(pontosGanhos) { tipoDeJogoScore = tipoDeJogo}.Show();
             Hide();
         }
 

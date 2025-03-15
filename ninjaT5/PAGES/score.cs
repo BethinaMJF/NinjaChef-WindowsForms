@@ -12,24 +12,18 @@ namespace ninjaT5.PAGES
 {
     public partial class score : baseForm
     {
-        dbFrutaNinjaEntities ct = new dbFrutaNinjaEntities();
-        
+        private dbFrutaNinjaEntities ct = new dbFrutaNinjaEntities();
         public string tipoDeJogoScore { get; set; }
-        public string dificuldadeScore { get; set; }
         public score(int pontos)
         {
             InitializeComponent();
 
             label3.Text = pontos.ToString();
-
-            var lista = ct.ExtratoJogador.Where(u => u.idUsuario == dados.atual.id);
-            
+            List<ExtratoJogador> lista = ct.ExtratoJogador.Where(u => u.idUsuario == dados.usuarioAtual.id).ToList();
             if (lista.Count() > 0)
             {
-                label5.Text = ct.ExtratoJogador.Where(u => u.idUsuario == dados.atual.id).OrderByDescending(u => u.pontos).First().pontos.ToString();
-
+                label5.Text = ct.ExtratoJogador.Where(u => u.idUsuario == dados.usuarioAtual.id).OrderByDescending(u => u.pontos).First().pontos.ToString();
             }
-             
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -40,7 +34,7 @@ namespace ninjaT5.PAGES
 
         private void button2_Click(object sender, EventArgs e)
         {
-            new jogo() { tipoDeJogo = tipoDeJogoScore, dificuldade = dificuldadeScore}.Show();
+            new jogo() { tipoDeJogo = tipoDeJogoScore}.Show();
             Hide();
         }
     }

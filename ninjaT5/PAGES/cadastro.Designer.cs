@@ -61,7 +61,7 @@
             this.textBox4.Location = new System.Drawing.Point(314, 397);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(381, 26);
-            this.textBox4.TabIndex = 5;
+            this.textBox4.TabIndex = 6;
             this.textBox4.Enter += new System.EventHandler(this.textBox4_Enter);
             // 
             // textBox1
@@ -77,7 +77,7 @@
             this.textBox2.Location = new System.Drawing.Point(314, 155);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(381, 26);
-            this.textBox2.TabIndex = 8;
+            this.textBox2.TabIndex = 3;
             this.textBox2.Enter += new System.EventHandler(this.textBox2_Enter);
             // 
             // textBox3
@@ -85,7 +85,7 @@
             this.textBox3.Location = new System.Drawing.Point(314, 316);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(381, 26);
-            this.textBox3.TabIndex = 9;
+            this.textBox3.TabIndex = 5;
             this.textBox3.Enter += new System.EventHandler(this.textBox3_Enter);
             // 
             // label2
@@ -95,7 +95,7 @@
             this.label2.Location = new System.Drawing.Point(701, 383);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 40);
-            this.label2.TabIndex = 10;
+            this.label2.TabIndex = 8;
             this.label2.Text = "👁️‍🗨️";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
@@ -140,7 +140,7 @@
             this.button2.Location = new System.Drawing.Point(41, 397);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(219, 46);
-            this.button2.TabIndex = 15;
+            this.button2.TabIndex = 2;
             this.button2.Text = "Selecionar foto";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -154,7 +154,7 @@
             this.button1.Location = new System.Drawing.Point(220, 520);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(381, 90);
-            this.button1.TabIndex = 14;
+            this.button1.TabIndex = 9;
             this.button1.Text = "Cadastrar";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -179,7 +179,7 @@
             this.label4.Location = new System.Drawing.Point(0, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(102, 88);
-            this.label4.TabIndex = 16;
+            this.label4.TabIndex = 1;
             this.label4.Text = "⬅️";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
@@ -188,7 +188,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(128)))), ((int)(((byte)(61)))));
-            this.ClientSize = new System.Drawing.Size(950, 747);
+            this.ClientSize = new System.Drawing.Size(932, 747);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.panel1);
             this.Name = "cadastro";

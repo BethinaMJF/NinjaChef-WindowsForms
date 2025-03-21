@@ -124,16 +124,15 @@ namespace ninjaT5.PAGES
 
         private void button1_Click(object sender, EventArgs e)
         {
-           // if(verificarLogin() == "ok")
+            if(verificarLogin() == "ok")
             {
-                //dados.usuarioAtual = ct.Usuario.FirstOrDefault(u => u.nick == textBox1.Text || u.email == textBox1.Text);
-                dados.usuarioAtual = ct.Usuario.FirstOrDefault(u=> u.id== 2);
+                dados.usuarioAtual = ct.Usuario.FirstOrDefault(u => u.nick == textBox1.Text || u.email == textBox1.Text);
                 new menu().Show();
                 Hide();
             }
-           // else
+           else
             {
-             //  MessageBox.Show(verificarLogin(), "Fruits Ninja", MessageBoxButtons.OK, MessageBoxIcon.Error);
+              MessageBox.Show(verificarLogin(), "Fruits Ninja", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
         }

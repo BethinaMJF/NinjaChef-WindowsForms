@@ -25,11 +25,13 @@ namespace ninjaT5.PAGES
         #region Visibilidade senha
         private void label1_Click(object sender, EventArgs e)
         {
+            button1.Focus();
             textBox3.UseSystemPasswordChar = !(bool)textBox3.UseSystemPasswordChar;
         }
 
         private void label2_Click(object sender, EventArgs e)
         {
+            button1.Focus();
             textBox4.UseSystemPasswordChar = !(bool)textBox4.UseSystemPasswordChar;
 
         }

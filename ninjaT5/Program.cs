@@ -20,10 +20,6 @@ namespace ninjaT5
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            
-          /*  var pbElemento = new WindowsMediaPlayer() { URL = "Resources\\musica.mp3" };
-            pbElemento.controls.play();*/
-            
             var settings = new Settings();
             if (settings.PrimeiraVez == false)
             {

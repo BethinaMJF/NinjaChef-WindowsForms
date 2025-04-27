@@ -40,16 +40,13 @@ NinjaChef é um jogo inspirado no clássico Fruta Ninja, onde você corta ingred
 ### 2️⃣ **Configure o Banco de Dados**
 
 - Execute o arquivo **script.sql** para criar o banco de dados e suas tabelas.
-- No arquivo **App.config**, ajuste a string de conexão para seu SQL Server:
+- No arquivo **App.config**, ajuste a string de conexão para o nome do seu servidor SQL Server:
 
 ```xml
 <connectionStrings>
     <add name="dbFrutaNinjaEntities" connectionString="Data Source=SEU_SERVIDOR;/>
 </connectionStrings>
 ```
-
-- Substitua **SEU_SERVIDOR** pelo nome do seu servidor SQL Server.
-
 ### 3️⃣ **Agora é só rodar o projeto no Visual Studio e jogar!**
 
 https://github.com/user-attachments/assets/c10b9436-c9a6-4efd-875d-f11659da92b8
